@@ -18,20 +18,35 @@ a:hover {
     font-size: 0.9rem;
 }
 
+.controlButton {
+    position: relative;
+    background-color: #222;
+    padding: 1em;
+    margin-left: 23px;
+    top: 38px;
+    border: 2px #111 solid;
+    border-radius: 15px;
+}
+
 /* Nav bar */
 .navBar {
     background-color: #222;
-    height: 60px;
+    height: 50px;
     display: block;
-    position: sticky;
     top: 0;
 }
 
-.navBar > img {
-    height: 80%;
-    margin: auto;
-    justify-content: center;
-    width: auto;
+.username {
+    font-size: 30px;
+    margin-top: 200px;
+}
+
+.logoutButton {
+    position: absolute;
+    background-color: #333;
+    color: #d0d0d0;
+    margin: 10px 0 0 10px;
+    border-radius: 5px;
 }
 
 /* AUTH */
@@ -166,11 +181,34 @@ input:-webkit-autofill:active{
     background-color: #7b25cb;
 }
 
-.group > ul {
+.inviteLabel {
+    margin: .2rem 0 0 0;
+}
+
+ul {
     padding: 0;
 }
 
 ul > .error {
     margin-top: -11px;
+}
+
+ul * {
     list-style-type: none;
+}
+
+/* Group Page */
+.list {
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #222;
+    display: inline-block;
+    line-height: 40px;
+    font-size: 30px;
+}
+
+.makePurchase {
+    margin-left: 23px;
 }

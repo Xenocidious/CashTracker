@@ -43,7 +43,7 @@ class UserController extends Controller
         ]);
 
         if (auth()->attempt($attributes)) {
-            return redirect('home')->with('success', 'Logged in');
+            return redirect('home');
         }
     }
 
@@ -51,6 +51,6 @@ class UserController extends Controller
     {
         auth()->logout();
 
-        return redirect('login');
+        return view('auth.login');
     }
 }

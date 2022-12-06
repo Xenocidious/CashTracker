@@ -6,7 +6,7 @@
     if ($groups) {
         foreach ($groups as $group) {
 ?>
-            <a href="/group" class="group">
+            <a href="group/{{ $group->id }}" class="group">
                 <h2>{{ $group->name }}</h2>
                 <h3>By {{ $group->owner }}</h3>
             </a>
@@ -14,23 +14,23 @@
         }
     }
 ?>
-    <div class="group">
+    <div class="group ">
         <form method="POST" action="/group/create">
             @csrf
             <h5>Make a new group</h5>
 
             <div class="groupFormItem">
-                <label>Group name</label>
+                <label class="inviteLabel">Group name</label>
                 <input type="submit" name="submit" value="Create">
                 <input type="text" name="name">
             </div>
         </form>
-        <form method="POST" action="/group/join">
+        <form method="POST" action="group/join">
             @csrf
             <h5>Or join an existing one</h5>
 
             <div class="groupFormItem">
-                <label>Invite Code</label>
+                <label class="inviteLabel">Invite Code</label>
                 <input type="submit" name="submit" value="Join">
                 <input type="text" name="invite_code">
             </div>

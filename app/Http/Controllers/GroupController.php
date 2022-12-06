@@ -15,7 +15,7 @@ class GroupController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        // Collect all groups
+        // Collect all the current user's groups
         $group_ids = GroupMember::where('user_id', $user_id)->pluck('group_id');
         $groups = Group::whereIn('id', $group_ids)->get();
 
@@ -24,6 +24,16 @@ class GroupController extends Controller
         }
         
         return view('app.home', ['groups' => $groups]);
+    }
+
+    public function group($group_id)
+    {
+        $group = Group::where('id', $group_id)->first();
+        $member_ids = GroupMember::where('group_id', $group_id)->pluck('user_id');
+        $members = User::whereIn('id', $member_ids)->get();
+        // ALSO COLLECT PURCHASES
+
+        return view('app.group', ['group' => $group, 'members' => $members]);
     }
 
     public function join()
@@ -39,7 +49,7 @@ class GroupController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        return redirect('home');
+        return view('app.group');
     }
     
 
@@ -52,14 +62,13 @@ class GroupController extends Controller
         $attributes['owner_id'] = auth()->user()->id;
 
         $group = Group::create($attributes);
-        Group::where('id', $group->id)->update(['invite_code' => STR::random(7).$group->id.STR::random(7)]);
 
         GroupMember::create([
             'group_id' => $group->id,
             'user_id' => $group->owner_id,
         ]);
 
-        return redirect('home');
+        return redirect('app.home');
     }
 
     public function edit()
@@ -70,5 +79,12 @@ class GroupController extends Controller
     public function delete()
     {
         
+    }
+
+    public function generateInvite($id)
+    {
+        Group::where('id', $id)->update(['invite_code' => STR::random(7).$id.STR::random(7)]);
+        
+        return redirect('group/'.$id);
     }
 }
