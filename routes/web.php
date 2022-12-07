@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Http\Controllers\GroupController;
 
 Route::get('/', [UserController::class, 'registerPage'])->middleware('guest');
 
-Route::get('register', [UserController::class, 'registerPage'])->middleware('guest');
+Route::get('register', [UserController::class, 'registerPage'])->name('register')->middleware('guest');
 Route::post('register', [UserController::class, 'store'])->middleware('guest');
 Route::get('login', [UserController::class, 'loginPage'])->middleware('guest');
 Route::post('login', [UserController::class, 'login'])->middleware('guest');
@@ -31,3 +32,5 @@ Route::post('group/create', [GroupController::class, 'create'])->middleware('aut
 Route::post('group/join', [GroupController::class, 'join'])->middleware('auth');
 
 Route::get('group/{id}/generateInvite', [GroupController::class, 'generateInvite'])->middleware('auth');
+
+Route::post('group/{id}/paymentCreate', [PaymentController::class, 'create'])->middleware('auth');

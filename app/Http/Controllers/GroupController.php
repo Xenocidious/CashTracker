@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Group;
 use App\Models\GroupMember;
+use App\Models\Payment;
 
 class GroupController extends Controller
 {
@@ -31,9 +32,19 @@ class GroupController extends Controller
         $group = Group::where('id', $group_id)->first();
         $member_ids = GroupMember::where('group_id', $group_id)->pluck('user_id');
         $members = User::whereIn('id', $member_ids)->get();
-        // ALSO COLLECT PURCHASES
+        $payments = Payment::where('group_id', $group_id)->get();
 
-        return view('app.group', ['group' => $group, 'members' => $members]);
+        $userPayments = [];
+        foreach ($members as $member) {
+            $userPayments[$member->id] = Payment::select('title', 'amount')->where(['user_id' => $member->id, 'group_id' => $group_id])->get();
+
+            $userPayments[$member->id]['total'] = 0;
+            foreach ($userPayments[$member->id] as $payment) {
+                $userPayments[$member->id]['total'] += $payment['amount'];
+            }
+        }
+       
+        return view('app.group', ['group' => $group, 'members' => $members, 'payments' => $userPayments]);
     }
 
     public function join()
@@ -49,7 +60,7 @@ class GroupController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        return view('app.group');
+        return $this->group($group_id);
     }
     
 
@@ -68,7 +79,7 @@ class GroupController extends Controller
             'user_id' => $group->owner_id,
         ]);
 
-        return redirect('app.home');
+        return $this->group($group->id);
     }
 
     public function edit()

@@ -26,6 +26,21 @@ a:hover {
     top: 38px;
     border: 2px #111 solid;
     border-radius: 15px;
+    cursor: pointer;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    box-shadow: 0 0 0 30px #888 inset !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+  margin: 0;
 }
 
 /* Nav bar */
@@ -47,6 +62,42 @@ a:hover {
     color: #d0d0d0;
     margin: 10px 0 0 10px;
     border-radius: 5px;
+}
+
+/* Tooltip */
+
+.inviteTooltip {
+    position: relative;
+}
+  
+.inviteTooltip .inviteTooltipText {
+    visibility: hidden;
+    width: 150px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 45%;
+    margin-left: -60px;
+}
+  
+.inviteTooltip .inviteTooltipText::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+  
+.inviteTooltip:hover .inviteTooltipText {
+    visibility: visible;
 }
 
 /* AUTH */
@@ -124,13 +175,6 @@ form {
     background-color: #7b25cb;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active{
-    box-shadow: 0 0 0 30px #888 inset !important;
-}
-
 /* Homepage */
 .container {
     margin-top: 75px;
@@ -179,7 +223,7 @@ input:-webkit-autofill:active{
     background-color: #7b25cb;
 }
 
-.inviteLabel {
+.groupFormLabel {
     margin: .2rem 0 0 0;
 }
 
@@ -204,5 +248,40 @@ ul * {
     background-color: #222;
     display: inline-block;
     line-height: 40px;
-    font-size: 30px;
+    font-size: 25px;
+}
+
+#inviteCode {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+}
+
+.showPurchases {
+    text-decoration: underline;
+}
+
+.groupPopup {
+    display: inline-flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popupChild {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #171717;
+    display: inline-table;
+}
+
+#paymentForm {
+    width: 500px;
+    height: 200px;
+}
+
+.closeButton {
+    float: right;
+    cursor: pointer;
 }
