@@ -28,3 +28,13 @@ paymentCreate = () => {
         popup.hidden = true
     }
 }
+
+showPayments = (member) => {
+    document.getElementById("groupMain").hidden = true
+    document.getElementById("payment" + member).hidden = false
+}
+
+closePayment = (member) => {
+    document.getElementById("groupMain").hidden = false
+    document.getElementById("payment" + member).hidden = true
+}

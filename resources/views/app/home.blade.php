@@ -32,7 +32,7 @@
             </div>
         </form>
         @if ($errors->any())
-            <ul>
+            <ul class="ulMakeGroup">
                 @foreach ($errors->all() as $error)
                     <li class="error">{{ $error }}</li>
                 @endforeach

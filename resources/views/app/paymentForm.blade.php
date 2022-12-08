@@ -6,20 +6,26 @@
 
         <div class="groupFormItem">
             <label class="groupFormLabel">Title</label>
-            <input type="text" name="title" value="{{ old('title') }}" required />
-            @error('title')
-                <p class="error">{{ $message }}<p>
-            @enderror
+            <input type="text" name="title" value="{{ old('title') }}" />
         </div>
         <div class="groupFormItem">
             <label class="groupFormLabel">Amount</label>
-            <input type="number" name="amount" value="{{ old('amount') }}" step=".01" required />
-            @error('amount')
-                <p class="error">{{ $message }}<p>
-            @enderror
+            <input type="number" name="amount" value="{{ old('amount') }}" step=".01" />
         </div>
         <div class="groupFormItem">
             <input type="submit" name="submit" value="Create">
         </div>
     </form>
+    @if ($errors->any())
+    <!-- Re-opens the popup form and displays errors -->
+        <script>
+            document.getElementById("popupContainer").hidden = false
+            document.getElementById("paymentForm").hidden = false
+        </script>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li class="error">{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
 </div>

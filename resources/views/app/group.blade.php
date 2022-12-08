@@ -14,13 +14,41 @@
 </div>
 <div class="container">
     <ul class="list"> 
-        <h3>Hover on a user to see their payments, or click <a href="" class="showPurchases">here</a> to see all purchases.</h3>
+        <div id="groupMain">
+            <h3>Click on a person to see their payments, or click <span class="underline" onclick="showPayments('Total')">here</span> to see all purchases.</h3>
+            @foreach ($members as $member)
+                @if ($payments[$member->id]['total'])
+                <li class="underline" onclick="showPayments({{ $member->id }}), {{ $displayMember = $member->id }}">{{ $member->username }} has paid a total of ${{ $payments[$member->id]['total'] }}</li>
+                @else
+                <li>{{ $member->username }} has not made any payments</li>
+                @endif
+            @endforeach
+        </div>
+
+        <div id="paymentTotal" hidden>
+            <span class="backButton" onclick="closePayment('Total')">Back</span>
+            <li class="paymentUsername">{{ $member->username }}</li>
+            @foreach ($payments[$member->id] as $payment)
+                @if (is_object($payment))
+                    <li>{{ $payment->title }}: ${{ $payment->amount }}</li>
+                @else 
+                    <li class="totalPayment">Total: ${{ $payment }}</li>
+                @endif
+            @endforeach
+        </div>
+
         @foreach ($members as $member)
-            @if ($payments[$member->id]['total'])
-            <li class="">{{ $member->username }} has paid a total of ${{ $payments[$member->id]['total'] }} : hover = show payments</li>
-            @else
-            <li class="">{{ $member->username }} has not made any payments</li>
-            @endif
+            <div id="payment{{ $member->id }}" hidden>
+                <span class="backButton" onclick="closePayment({{ $member->id }})">Back</span>
+                <li class="paymentUsername">{{ $member->username }}</li>
+                @foreach ($payments[$member->id] as $payment)
+                    @if (is_object($payment))
+                        <li>{{ $payment->title }}: ${{ $payment->amount }}</li>
+                    @else 
+                        <li class="totalPayment">Total: ${{ $payment }}</li>
+                    @endif
+                @endforeach
+            </div>
         @endforeach
     </ul>
 </div>

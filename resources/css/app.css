@@ -232,7 +232,7 @@ ul {
     padding: 0;
 }
 
-ul > .error {
+.ulMakeGroup > .error {
     margin-top: -11px;
 }
 
@@ -256,10 +256,12 @@ ul * {
     user-select: none;
 }
 
-.showPurchases {
+.underline:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
+/* Payments */
 .groupPopup {
     display: inline-flex;
     position: fixed;
@@ -283,4 +285,26 @@ ul * {
 .closeButton {
     float: right;
     cursor: pointer;
+}
+
+.backButton {
+    font-size: 15px;
+    line-height: 1.15;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #171717;
+}
+
+.paymentUsername {
+    font-size: 30px;
+    border-bottom: 3px solid #111;
+}
+
+.totalPayment {
+    width: 100%;
+    text-align: right;
+    border-top: 3px solid #111;
 }

@@ -43,7 +43,7 @@ class GroupController extends Controller
                 $userPayments[$member->id]['total'] += $payment['amount'];
             }
         }
-       
+
         return view('app.group', ['group' => $group, 'members' => $members, 'payments' => $userPayments]);
     }
 
