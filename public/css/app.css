@@ -1,3 +1,4 @@
+/* General */
 body {
     background-color: #333;
     font-family: sans-serif;
@@ -16,6 +17,11 @@ a:hover {
 .error {
     color: #e01023;
     font-size: 0.9rem;
+}
+
+.controlBar {
+    height: auto;
+    padding: 0 25px;
 }
 
 .controlButton {
@@ -113,8 +119,7 @@ input::-webkit-inner-spin-button {
     border-radius: 5px;
     background-color: #555;
     padding: 20px;
-    width: 20%;
-
+    width: 315px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -340,5 +345,68 @@ ul * {
     display: inline-block;
     vertical-align: top;
     padding: 5px;
+    margin-bottom: 20px;
     border: 3px solid #111;
+}
+
+@media only screen and (max-width: 1249px) {
+    /* General */
+    .logoutButton {
+        position: relative;
+        float: right;
+    }
+
+    .controlButton {
+        top: 0;
+        position: normal;
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        background-color: #222;
+        border: 2px #111 solid;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    /* Homepage */
+    .container {
+        margin-top: 25px;
+        padding: 0 25px 25px;
+        max-width: 100%;
+        grid-row-gap: 25px;
+    }
+
+    .group {
+        width: 100%;
+        height: auto;
+        word-wrap: break-word
+    }
+
+    .formGroup {
+        height: 275px;
+        margin-bottom: 50px;
+    }
+
+    .groupFormItem > input {
+        width: 100%;
+        margin: 5px 0px;
+    }
+
+    /* Expenses */
+    .groupPopup {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #expenseForm {
+        width: 100%;
+        height: 200px;
+    }
+
+    #expenseEditForm {
+        width: 80%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }

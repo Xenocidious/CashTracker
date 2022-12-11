@@ -1,4 +1,5 @@
 @include('layouts.app')
+@include('layouts.nav')
 
 <div id="expenseEditForm" class="popupChild">
     <form method="POST" action="/expense/update/{{ $expense->id }}">

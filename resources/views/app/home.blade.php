@@ -10,7 +10,7 @@
             </a>
         @endforeach
     @endif
-    <div class="group">
+    <div class="group formGroup">
         <form method="POST" action="/group/create">
             @csrf
             <h5>Make a new group</h5>
