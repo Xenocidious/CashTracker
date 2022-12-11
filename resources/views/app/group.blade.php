@@ -15,7 +15,7 @@
 <div class="container">
     <ul class="list"> 
         <div id="groupMain">
-            <h3>Click on a person to see their payments, or click <span class="underline" onclick="showPayments('Total')">here</span> to see all purchases.</h3>
+            <h3>Click on a person to see their payments, or click <span class="underline" onclick="showPayments('Collection')">here</span> to see all payments.</h3>
             @foreach ($members as $member)
                 @if ($payments[$member->id]['total'])
                 <li class="underline" onclick="showPayments({{ $member->id }}), {{ $displayMember = $member->id }}">{{ $member->username }} has paid a total of ${{ $payments[$member->id]['total'] }}</li>
@@ -25,14 +25,21 @@
             @endforeach
         </div>
 
-        <div id="paymentTotal" hidden>
-            <span class="backButton" onclick="closePayment('Total')">Back</span>
-            <li class="paymentUsername">{{ $member->username }}</li>
-            @foreach ($payments[$member->id] as $payment)
-                @if (is_object($payment))
-                    <li>{{ $payment->title }}: ${{ $payment->amount }}</li>
-                @else 
-                    <li class="totalPayment">Total: ${{ $payment }}</li>
+        <div id="paymentCollection" hidden>
+            <span class="backButton" onclick="closePayment('Collection')">Back</span>
+            @foreach ($members as $member)
+                @if ($payments[$member->id]['total'] !== 0)
+                    <div class="collectionUser">
+                            <li class="paymentUsername">{{ $member->username }}</li>
+                        @foreach ($payments[$member->id] as $payment)
+                            @if (is_object($payment))
+                                <li>{{ $payment->title }}: <span class="paymentAmounts">${{ $payment->amount }}</span></li>
+                            @endif
+                        @endforeach
+                        @if ($payment !== 0)
+                            <li class="totalUserPayment">Total: ${{ $payment }}</li>
+                        @endif
+                    </div>
                 @endif
             @endforeach
         </div>
@@ -43,9 +50,13 @@
                 <li class="paymentUsername">{{ $member->username }}</li>
                 @foreach ($payments[$member->id] as $payment)
                     @if (is_object($payment))
-                        <li>{{ $payment->title }}: ${{ $payment->amount }}</li>
+                        <li>{{ $payment->title }}: <span class="paymentAmounts">${{ $payment->amount }} </span></li>
+                        <div class="paymentChange">
+                            <a href="/payment/edit/{{ $payment->id }}" id="paymentEdit" class="underline">Edit</a> 
+                            <a href="/payment/delete/{{ $payment->id }}" id="paymentDelete" class="underline">Delete</a>
+                        </div>
                     @else 
-                        <li class="totalPayment">Total: ${{ $payment }}</li>
+                        <li class="totalUserPayment">Total: ${{ $payment }}</li>
                     @endif
                 @endforeach
             </div>
@@ -54,5 +65,5 @@
 </div>
 
 <div id="popupContainer" class="groupPopup" hidden>
-    @include('app.paymentForm')
+    @include('payments.create')
 </div>

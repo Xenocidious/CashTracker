@@ -43,6 +43,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+::placeholder {
+    color: #333;
+}
+
 /* Nav bar */
 .navBar {
     background-color: #222;
@@ -211,7 +215,7 @@ form {
 }
 
 .groupFormItem > input[type=submit]{
-    width: 60px;
+    width: auto;
     margin-left: 5px;
     background-color: #8a2be2;
     color: #d0d0d0;
@@ -230,6 +234,7 @@ form {
 
 ul {
     padding: 0;
+    margin-bottom: 0;
 }
 
 .ulMakeGroup > .error {
@@ -257,7 +262,7 @@ ul * {
 }
 
 .underline:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
     cursor: pointer;
 }
 
@@ -282,6 +287,14 @@ ul * {
     height: 200px;
 }
 
+#paymentEditForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 .closeButton {
     float: right;
     cursor: pointer;
@@ -290,12 +303,11 @@ ul * {
 .backButton {
     font-size: 15px;
     line-height: 1.15;
-    display: inline-block;
     cursor: pointer;
-    margin-bottom: 10px;
     padding: 10px;
     border-radius: 10px;
     background-color: #171717;
+    vertical-align: top;
 }
 
 .paymentUsername {
@@ -303,8 +315,26 @@ ul * {
     border-bottom: 3px solid #111;
 }
 
-.totalPayment {
+.totalUserPayment {
     width: 100%;
     text-align: right;
     border-top: 3px solid #111;
+}
+
+.paymentAmounts {
+    margin-left: 8px;
+    float: right;
+}
+
+.paymentChange {
+    font-size: 16px;
+    line-height: 30px;
+    text-align: right;
+}
+
+.collectionUser {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    border: 3px solid #111;
 }

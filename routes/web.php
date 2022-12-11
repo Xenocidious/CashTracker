@@ -33,4 +33,7 @@ Route::post('group/join', [GroupController::class, 'join'])->middleware('auth');
 
 Route::get('group/{id}/generateInvite', [GroupController::class, 'generateInvite'])->middleware('auth');
 
-Route::post('group/{id}/paymentCreate', [PaymentController::class, 'create'])->middleware('auth');
+Route::post('payment/create/{group_id}', [PaymentController::class, 'create'])->middleware('auth');
+Route::get('payment/edit/{ids}', [PaymentController::class, 'edit'])->middleware('auth');
+Route::post('payment/update/{id}', [PaymentController::class, 'update'])->middleware('auth');
+Route::get('payment/delete/{id}', [PaymentController::class, 'delete'])->middleware('auth');

@@ -36,7 +36,7 @@ class GroupController extends Controller
 
         $userPayments = [];
         foreach ($members as $member) {
-            $userPayments[$member->id] = Payment::select('title', 'amount')->where(['user_id' => $member->id, 'group_id' => $group_id])->get();
+            $userPayments[$member->id] = Payment::select('id', 'title', 'amount')->where(['user_id' => $member->id, 'group_id' => $group_id])->get();
 
             $userPayments[$member->id]['total'] = 0;
             foreach ($userPayments[$member->id] as $payment) {
@@ -82,19 +82,9 @@ class GroupController extends Controller
         return $this->group($group->id);
     }
 
-    public function edit()
-    {
-        
-    }
-
-    public function delete()
-    {
-        
-    }
-
     public function generateInvite($id)
     {
-        Group::where('id', $id)->update(['invite_code' => STR::random(7).$id.STR::random(7)]);
+        Group::find($id)->update(['invite_code' => STR::random(7).$id.STR::random(7)]);
         
         return redirect('group/'.$id);
     }

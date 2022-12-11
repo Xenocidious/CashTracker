@@ -1,5 +1,5 @@
 <div id="paymentForm" class="popupChild">
-    <form method="POST" action="/group/{{ $group->id }}/paymentCreate">
+    <form method="POST" action="/payment/create/{{ $group->id }}">
         @csrf
         <span class="closeButton" onclick="paymentCreate()">Close</span>
         <h5>Make a new payment</h5>
