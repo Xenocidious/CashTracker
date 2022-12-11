@@ -17,9 +17,9 @@ outFunc = () => {
 }
 
 // Group Page Popup
-paymentCreate = () => {
+expenseCreate = () => {
     var container = document.getElementById("popupContainer")
-    var popup = document.getElementById("paymentForm")
+    var popup = document.getElementById("expenseForm")
     if (container.hidden === true) {
         container.hidden = false
         popup.hidden = false
@@ -29,12 +29,12 @@ paymentCreate = () => {
     }
 }
 
-showPayments = (member) => {
+showExpenses = (member) => {
     document.getElementById("groupMain").hidden = true
-    document.getElementById("payment" + member).hidden = false
+    document.getElementById("expense" + member).hidden = false
 }
 
-closePayment = (member) => {
+closeExpense = (member) => {
     document.getElementById("groupMain").hidden = false
-    document.getElementById("payment" + member).hidden = true
+    document.getElementById("expense" + member).hidden = true
 }

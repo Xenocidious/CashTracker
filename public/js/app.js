@@ -2078,9 +2078,9 @@ outFunc = function outFunc() {
 };
 
 // Group Page Popup
-paymentCreate = function paymentCreate() {
+expenseCreate = function expenseCreate() {
   var container = document.getElementById("popupContainer");
-  var popup = document.getElementById("paymentForm");
+  var popup = document.getElementById("expenseForm");
   if (container.hidden === true) {
     container.hidden = false;
     popup.hidden = false;
@@ -2089,13 +2089,13 @@ paymentCreate = function paymentCreate() {
     popup.hidden = true;
   }
 };
-showPayments = function showPayments(member) {
+showExpenses = function showExpenses(member) {
   document.getElementById("groupMain").hidden = true;
-  document.getElementById("payment" + member).hidden = false;
+  document.getElementById("expense" + member).hidden = false;
 };
-closePayment = function closePayment(member) {
+closeExpense = function closeExpense(member) {
   document.getElementById("groupMain").hidden = false;
-  document.getElementById("payment" + member).hidden = true;
+  document.getElementById("expense" + member).hidden = true;
 };
 
 /***/ }),

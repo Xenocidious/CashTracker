@@ -3,7 +3,7 @@
 
 <div class="controlBar">
     <a href="/home" class="controlButton">Return Home</a>
-    <a class="controlButton" onclick="paymentCreate()">Create a new payment</a>
+    <a class="controlButton" onclick="expenseCreate()">Create a new expense</a>
     @if ($group->invite_code)
         <a id="inviteCode" class="controlButton inviteTooltip" onclick="copyInviteCode('{{ $group->invite_code }}')" onmouseout="outFunc()">
             <span class="inviteTooltipText" id="myTooltip">Copy to clipboard</span>
@@ -15,29 +15,31 @@
 <div class="container">
     <ul class="list"> 
         <div id="groupMain">
-            <h3>Click on a person to see their payments, or click <span class="underline" onclick="showPayments('Collection')">here</span> to see all payments.</h3>
+            <h3>Click on a person to see their expenses, or click 
+                <span class="underline" onclick="showExpenses('Collection')">here</span> to see all expenses.
+            </h3>
             @foreach ($members as $member)
-                @if ($payments[$member->id]['total'])
-                <li class="underline" onclick="showPayments({{ $member->id }}), {{ $displayMember = $member->id }}">{{ $member->username }} has paid a total of ${{ $payments[$member->id]['total'] }}</li>
+                @if ($expenses[$member->id]['total'])
+                <li class="underline" onclick="showExpenses({{ $member->id }}), {{ $displayMember = $member->id }}">{{ $member->username }} has paid a total of ${{ $expenses[$member->id]['total'] }}</li>
                 @else
-                <li>{{ $member->username }} has not made any payments</li>
+                <li>{{ $member->username }} has not made any expenses</li>
                 @endif
             @endforeach
         </div>
 
-        <div id="paymentCollection" hidden>
-            <span class="backButton" onclick="closePayment('Collection')">Back</span>
+        <div id="expenseCollection" hidden>
+            <span class="backButton" onclick="closeExpense('Collection')">Back</span>
             @foreach ($members as $member)
-                @if ($payments[$member->id]['total'] !== 0)
+                @if ($expenses[$member->id]['total'] !== 0)
                     <div class="collectionUser">
-                            <li class="paymentUsername">{{ $member->username }}</li>
-                        @foreach ($payments[$member->id] as $payment)
-                            @if (is_object($payment))
-                                <li>{{ $payment->title }}: <span class="paymentAmounts">${{ $payment->amount }}</span></li>
+                            <li class="expenseUsername">{{ $member->username }}</li>
+                        @foreach ($expenses[$member->id] as $expense)
+                            @if (is_object($expense))
+                                <li>{{ $expense->title }}: <span class="expenseAmounts">${{ $expense->amount }}</span></li>
                             @endif
                         @endforeach
-                        @if ($payment !== 0)
-                            <li class="totalUserPayment">Total: ${{ $payment }}</li>
+                        @if ($expense !== 0)
+                            <li class="totalUserExpense">Total: ${{ $expense }}</li>
                         @endif
                     </div>
                 @endif
@@ -45,18 +47,18 @@
         </div>
 
         @foreach ($members as $member)
-            <div id="payment{{ $member->id }}" hidden>
-                <span class="backButton" onclick="closePayment({{ $member->id }})">Back</span>
-                <li class="paymentUsername">{{ $member->username }}</li>
-                @foreach ($payments[$member->id] as $payment)
-                    @if (is_object($payment))
-                        <li>{{ $payment->title }}: <span class="paymentAmounts">${{ $payment->amount }} </span></li>
-                        <div class="paymentChange">
-                            <a href="/payment/edit/{{ $payment->id }}" id="paymentEdit" class="underline">Edit</a> 
-                            <a href="/payment/delete/{{ $payment->id }}" id="paymentDelete" class="underline">Delete</a>
+            <div id="expense{{ $member->id }}" hidden>
+                <span class="backButton" onclick="closeExpense({{ $member->id }})">Back</span>
+                <li class="expenseUsername">{{ $member->username }}</li>
+                @foreach ($expenses[$member->id] as $expense)
+                    @if (is_object($expense))
+                        <li>{{ $expense->title }}: <span class="expenseAmounts">${{ $expense->amount }} </span></li>
+                        <div class="expenseChange">
+                            <a href="/expense/edit/{{ $expense->id }}" id="expenseEdit" class="underline">Edit</a> 
+                            <a href="/expense/delete/{{ $expense->id }}" id="expenseDelete" class="underline">Delete</a>
                         </div>
                     @else 
-                        <li class="totalUserPayment">Total: ${{ $payment }}</li>
+                        <li class="totalUserExpense">Total: ${{ $expense }}</li>
                     @endif
                 @endforeach
             </div>
@@ -65,5 +67,5 @@
 </div>
 
 <div id="popupContainer" class="groupPopup" hidden>
-    @include('payments.create')
+    @include('expenses.create')
 </div>

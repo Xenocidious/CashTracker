@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ Route::post('group/join', [GroupController::class, 'join'])->middleware('auth');
 
 Route::get('group/{id}/generateInvite', [GroupController::class, 'generateInvite'])->middleware('auth');
 
-Route::post('payment/create/{group_id}', [PaymentController::class, 'create'])->middleware('auth');
-Route::get('payment/edit/{ids}', [PaymentController::class, 'edit'])->middleware('auth');
-Route::post('payment/update/{id}', [PaymentController::class, 'update'])->middleware('auth');
-Route::get('payment/delete/{id}', [PaymentController::class, 'delete'])->middleware('auth');
+Route::post('expense/create/{group_id}', [ExpenseController::class, 'create'])->middleware('auth');
+Route::get('expense/edit/{ids}', [ExpenseController::class, 'edit'])->middleware('auth');
+Route::post('expense/update/{id}', [ExpenseController::class, 'update'])->middleware('auth');
+Route::get('expense/delete/{id}', [ExpenseController::class, 'delete'])->middleware('auth');

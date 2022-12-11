@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Group;
 use App\Models\GroupMember;
-use App\Models\Payment;
+use App\Models\Expense;
 
 class GroupController extends Controller
 {
@@ -32,19 +32,19 @@ class GroupController extends Controller
         $group = Group::where('id', $group_id)->first();
         $member_ids = GroupMember::where('group_id', $group_id)->pluck('user_id');
         $members = User::whereIn('id', $member_ids)->get();
-        $payments = Payment::where('group_id', $group_id)->get();
+        $expenses = Expense::where('group_id', $group_id)->get();
 
-        $userPayments = [];
+        $userExpenses = [];
         foreach ($members as $member) {
-            $userPayments[$member->id] = Payment::select('id', 'title', 'amount')->where(['user_id' => $member->id, 'group_id' => $group_id])->get();
+            $userExpenses[$member->id] = Expense::select('id', 'title', 'amount')->where(['user_id' => $member->id, 'group_id' => $group_id])->get();
 
-            $userPayments[$member->id]['total'] = 0;
-            foreach ($userPayments[$member->id] as $payment) {
-                $userPayments[$member->id]['total'] += $payment['amount'];
+            $userExpenses[$member->id]['total'] = 0;
+            foreach ($userExpenses[$member->id] as $expense) {
+                $userExpenses[$member->id]['total'] += $expense['amount'];
             }
         }
 
-        return view('app.group', ['group' => $group, 'members' => $members, 'payments' => $userPayments]);
+        return view('app.group', ['group' => $group, 'members' => $members, 'expenses' => $userExpenses]);
     }
 
     public function join()

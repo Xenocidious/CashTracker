@@ -266,7 +266,7 @@ ul * {
     cursor: pointer;
 }
 
-/* Payments */
+/* Expenses */
 .groupPopup {
     display: inline-flex;
     position: fixed;
@@ -282,12 +282,12 @@ ul * {
     display: inline-table;
 }
 
-#paymentForm {
+#expenseForm {
     width: 500px;
     height: 200px;
 }
 
-#paymentEditForm {
+#expenseEditForm {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -310,23 +310,23 @@ ul * {
     vertical-align: top;
 }
 
-.paymentUsername {
+.expenseUsername {
     font-size: 30px;
     border-bottom: 3px solid #111;
 }
 
-.totalUserPayment {
+.totalUserExpense {
     width: 100%;
     text-align: right;
     border-top: 3px solid #111;
 }
 
-.paymentAmounts {
+.expenseAmounts {
     margin-left: 8px;
     float: right;
 }
 
-.paymentChange {
+.expenseChange {
     font-size: 16px;
     line-height: 30px;
     text-align: right;
